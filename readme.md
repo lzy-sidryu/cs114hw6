@@ -15,19 +15,13 @@ SO I will just copy paste them here:
 ppmi[word_dict['dogs']]
 ```
 
-
     array([2.4841, 0.    , 0.    , 0.    , 0.    , 3.112 , 1.7882])
-
-
 
 ```python
 count_matrix[word_dict['dogs']]
 ```
 
-
     array([9., 0., 0., 0., 0., 3., 1.])
-
-
 
 Here we can see that the ppmi vector gives a higher weight to "bite" and "like" over "the".
 
@@ -51,11 +45,9 @@ calc_dist('like', 'bite', ppmi)
     The distance between feed and bite is 5.299
     The distance between like and bite is 3.624
 
-
 We can see the distances calculated agree with our intuition. Words with similar meaning do have smaller distance.
 
 ### Distance calculated by using SVD-reduced ppmi
-
 
 ```python
 calc_dist('women', 'men', reduced_ppmi)
@@ -72,7 +64,6 @@ calc_dist('like', 'bite', reduced_ppmi)
     The distance between feed and like is 2.052
     The distance between feed and bite is 5.101
     The distance between like and bite is 3.558
-
 
 We can see the reduced ppmi matrix still keep the information needed.
 
