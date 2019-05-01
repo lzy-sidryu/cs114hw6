@@ -10,20 +10,27 @@ SO I will just copy paste them here:
 
 ### ppmi vs original count matrix's representation of "dogs"
 
-
 ```python
 ppmi[word_dict['dogs']]
 ```
 
-    array([2.4841, 0.    , 0.    , 0.    , 0.    , 3.112 , 1.7882])
+    array([0.4574, 0.    , 0.    , 0.    , 0.    , 0.842 , 0.2859])
 
 ```python
-count_matrix[word_dict['dogs']]
+count_vec = count_matrix[word_dict['dogs']]
+# also normalize the count vector to make a better comparison
+count_vec /= norm(count_vec)
+count_vec
 ```
 
-    array([9., 0., 0., 0., 0., 3., 1.])
+    array([0.9435, 0.    , 0.    , 0.    , 0.    , 0.3145, 0.1048])
 
-Here we can see that the ppmi vector gives a higher weight to "bite" and "like" over "the".
+Note that
+```python
+word_dict = {'the': 0, 'men': 1, 'feed': 2, 'dogs': 3, 'women': 4, 'bite': 5, 'like': 6}
+```
+
+Here we can see that the ppmi vector gives a higher weight to "bite" and "like" over "the". 
 
 This is right because "the" can (in both real English and this small corpus) appear together with **almost any noun** while the later two verbs are more informative on the meaning of the word "dog".
 
@@ -38,12 +45,12 @@ calc_dist('feed', 'bite', ppmi)
 calc_dist('like', 'bite', ppmi)
 ```
 
-    The distance between women and men is 1.107
-    The distance between women and dogs is 4.328
-    The distance between dogs and men is 4.128
-    The distance between feed and like is 2.334
-    The distance between feed and bite is 5.299
-    The distance between like and bite is 3.624
+    The distance between women and men is 0.184
+    The distance between women and dogs is 1.149
+    The distance between dogs and men is 1.101
+    The distance between feed and like is 0.356
+    The distance between feed and bite is 1.263
+    The distance between like and bite is 1.013
 
 We can see the distances calculated agree with our intuition. Words with similar meaning do have smaller distance.
 
@@ -58,15 +65,14 @@ calc_dist('feed', 'bite', reduced_ppmi)
 calc_dist('like', 'bite', reduced_ppmi)
 ```
 
-    The distance between women and men is 0.851
-    The distance between women and dogs is 2.704
-    The distance between dogs and men is 2.185
-    The distance between feed and like is 2.052
-    The distance between feed and bite is 5.101
-    The distance between like and bite is 3.558
+    The distance between women and men is 0.038
+    The distance between women and dogs is 0.776
+    The distance between dogs and men is 0.741
+    The distance between feed and like is 0.280
+    The distance between feed and bite is 1.226
+    The distance between like and bite is 0.994
 
-We can see the reduced ppmi matrix still keep the information needed.
-
+We can see the reduced ppmi matrix still keeps the information needed.
 
 ## Task 2
 
